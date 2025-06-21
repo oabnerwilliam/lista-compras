@@ -12,15 +12,13 @@ Siga os passos abaixo para colocar o projeto em funcionamento na sua máquina:
 1. Instalação das Dependências
 Navegue até a pasta do projeto no seu terminal e execute o seguinte comando para instalar as dependências necessárias:
 
-Bash
-
 npm install
+
 3. Iniciando o Banco de Dados (json-server)
 Para que o aplicativo possa salvar e carregar seus dados, você precisa iniciar o json-server. Em um novo terminal (mantenha o terminal anterior aberto se estiver instalando dependências), execute:
 
-Bash
-
 npm run banco
+
 Este comando iniciará seu "banco de dados" local na porta 5000 (por padrão).
 
 4. Executando o Frontend com Live Server
