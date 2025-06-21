@@ -1,0 +1,67 @@
+* {
+    font-family: "Montserrat", sans-serif;
+}
+a {
+    color: white;
+}
+span.comprado {
+    text-decoration: line-through;
+    color: gray;
+}
+.btn-icon {
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    margin-left: 8px;
+    cursor: pointer;
+}
+.btn-icon:hover {
+    color: #dc3545;
+}
+.icon {
+    color: white;
+    transition: all 0.3s ease;
+}
+.icon:hover {
+    color: gold;
+}
+.btn-black {
+    background-color: black;
+    color: white;
+    transition: all 0.3s ease;
+    &:hover {
+    background-color: gold;
+    color: black;
+    }
+}
+.btn-gold {
+    background-color: gold;
+    color: black;
+    transition: all 0.3s ease;
+    &:hover {
+    background-color: hsl(51, 100%, 40%);
+    color: black;
+    }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1 0 auto;
+}
+
+footer.navbar {
+  flex-shrink: 0;
+  position: static !important;
+  height: 4rem; 
+}
