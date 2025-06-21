@@ -1,4 +1,5 @@
 🛒 Lista de Compras
+
 Bem-vindo ao projeto Lista de Compras! Este é um aplicativo simples e eficiente para gerenciar seus itens de supermercado, desenvolvido com JavaScript puro e persistência de dados via json-server.
 
 ✨ Funcionalidades
