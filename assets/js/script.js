@@ -1,4 +1,4 @@
-// Busca os items do localStorage, e, se não existirem itens, retorna um array vazio
+// Busca os itens do banco, e, se não existirem itens, retorna um array vazio
 async function carregarLista() {
     try {
         const resposta = await fetch("http://localhost:5000/itens", {
@@ -19,11 +19,9 @@ async function carregarLista() {
         console.error("Erro na requisição:", error.message)
         return []
     }
-
-    //return JSON.parse(localstorage.getItem("listaDeCompras")) || []
 }
 
-// Salva a lista no localStorage após converter para string JSON
+// Salva a lista no banco após converter para string JSON
 async function salvarItem(item) {
     try {
         const resposta = await fetch("http://localhost:5000/itens", {
@@ -44,11 +42,9 @@ async function salvarItem(item) {
     } catch (error) {
         console.error("Erro na requisição:", error.message)
     }
-    
-    //localStorage.setItem("listaDeCompras", JSON.stringify(lista))
 }
 
-// Salva a lista no localStorage após converter para string JSON
+// Edita o item desejado com a requisição PUT no banco
 async function editarItem(id, novoItem) {
     try {
         const resposta = await fetch(`http://localhost:5000/itens/${id}`, {
@@ -69,10 +65,9 @@ async function editarItem(id, novoItem) {
     } catch (error) {
         console.error("Erro na requisição:", error.message)
     }
-    
-    //localStorage.setItem("listaDeCompras", JSON.stringify(lista))
 }
 
+//Remove o item do banco com a requisição DELETE
 async function removerItem(item) {
     try {
         const resposta = await fetch(`http://localhost:5000/itens/${item.id}`, {
@@ -94,6 +89,7 @@ async function removerItem(item) {
     }
 }
 
+//Muda o status do item para comprado, e, se ele já estiver comprado, muda para não comprado
 async function comprarItem(item) {
     if (!item.comprado) {
         try {
@@ -172,12 +168,14 @@ async function renderizarLista() {
 
     const botoes = document.createElement("div")
 
+    //Cria o botão de editar item da lista
     const btnEditar = document.createElement("button")
     btnEditar.innerHTML = "Editar"
     btnEditar.className = "btn text-black"
     btnEditar.title = "Editar"
     btnEditar.addEventListener("click", () => editar(item, index))
 
+    //Cria o botão de remover item da lista
     const btnExcluir = document.createElement("button")
     btnExcluir.innerHTML = "Excluir"
     btnExcluir.className = "btn btn-gold"
@@ -189,9 +187,11 @@ async function renderizarLista() {
       }
     })
 
+    //Coloca botões no setor certo
     botoes.appendChild(btnEditar)
     botoes.appendChild(btnExcluir)
 
+    //Adiciona todos os elementos ao HTML
     li.appendChild(span)
     li.appendChild(botoes)
     listaUl.appendChild(li)
@@ -238,8 +238,7 @@ async function editar(item, index) {
             nome: novoNome,
             comprado: item.comprado
         }
-        //itens[index].nome = novoNome // Atualiza o nome
-        await editarItem(item.id, novoItem)
+        await editarItem(item.id, novoItem) //Edita o item
         await renderizarLista()
     }
 }
@@ -267,8 +266,7 @@ document.getElementById("formAdicionarItem").addEventListener("submit", async (e
 // Botão "Limpar Lista"
 document.getElementById("limparLista").addEventListener("click", async () => {
     if (confirm("Deseja limpar toda a lista?")) {
-        //localStorage.removeItem("listaDeCompras") // Remove do armazenamento
-        const lista = await carregarLista()
+        const lista = await carregarLista() //Puxa a lista do banco
         const deletarTodos = lista.map(async (item)=>{
             const resposta = await fetch(`http://localhost:5000/itens/${item.id}`, {
                 method: "DELETE",
@@ -284,14 +282,14 @@ document.getElementById("limparLista").addEventListener("click", async () => {
             const dados = await resposta.json()
 
             console.log("Removido: ", dados)
-        })
+        }) // Deleta todos os itens da lista com um array.map
 
         try {
             await Promise.all(deletarTodos)
             await renderizarLista()
         } catch (error) {
             console.error("Erro ao remover itens:", error.message)
-        }
+        } // Executa a remoção
     }
 })
 

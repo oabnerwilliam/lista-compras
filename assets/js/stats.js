@@ -1,5 +1,4 @@
-//const itens = JSON.parse(localStorage.getItem("listaDeCompras")) || [] // Busca os items do localStorage, e, se não existirem itens, retorna um array vazio
-
+//Carrega a lista de itens do banco
 async function carregarLista() {
     try {
         const resposta = await fetch("http://localhost:5000/itens", {
@@ -22,6 +21,7 @@ async function carregarLista() {
     }
 }
 
+//Renderiza os dados da lista
 const renderizarStats = async () => {
     const loader = document.getElementById("loader")
     const stats = document.getElementById("stats")
@@ -46,6 +46,7 @@ const renderizarStats = async () => {
     // Oculta o loader ao final
     if (loader) loader.style.display = "none"
 
+    //Mostra as estatísticas depois que o loader some
     if (stats) stats.style.display = "block"
 }
 
